@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run unit tests
+      - name: Run unit tests (probe rename)
         run: python3 -m unittest discover -s tests -t . -v
