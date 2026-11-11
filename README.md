@@ -1,4 +1,4 @@
-# agent-sandbox-poc
+# agent-testbed-poc
 
 Disposable sandbox repository for testing branch protection, review rules and
 AI coding-agent workflows. It contains only synthetic, meaningless example code.
