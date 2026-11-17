@@ -1,0 +1,20 @@
+package __PKG__;
+
+import net.minecraft.gametest.framework.GameTest;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.neoforged.neoforge.gametest.GameTestHolder;
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+
+/** Szintetikus füstteszt: a mod betöltődik, és a GameTest-szerver lefuttat egy tesztet. */
+@GameTestHolder("__MODID__")
+@PrefixGameTestTemplate(false)
+public class SmokeGameTests {
+    @GameTest(template = "empty")
+    public static void smoke(GameTestHelper helper) {
+        // Negatív próbához a CI a GT_FAIL=1 környezeti változót állítja be.
+        if ("1".equals(System.getenv("GT_FAIL"))) {
+            helper.fail("Szándékos bukás (negatív próba)");
+        }
+        helper.succeed();
+    }
+}

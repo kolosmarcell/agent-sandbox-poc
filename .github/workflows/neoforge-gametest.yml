@@ -1,0 +1,28 @@
+# T-027 éjszakai próba (2): szintetikus NeoForge GameTest CI-ben, GF-tartalom nélkül.
+# A workflow-fájlt Marcell pusholja (a gépi fióknak nincs workflow-joga); a futtatott
+# szkriptet (ci/) a gépi fiók is javíthatja az agent/gametest-* ágon.
+name: neoforge-gametest
+on:
+  push:
+    branches: ['agent/gametest-**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gametest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: GameTest (pozitív + negatív próba)
+        run: bash ci/gametest.sh
+      - name: Naplók
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gametest-logs
+          path: work/*.log
